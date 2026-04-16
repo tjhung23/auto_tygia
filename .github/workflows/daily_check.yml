@@ -2,7 +2,7 @@ name: Auto_Get_VCB_Rates
 
 on:
   schedule:
-    - cron: '0 * * * *' # Chạy vào phút thứ 0 của mỗi giờ
+    - cron: '*/5 * * * *' # Chạy vào phút thứ 0 của mỗi giờ
   workflow_dispatch: # Cho phép bấm nút chạy thủ công
 
 jobs:
