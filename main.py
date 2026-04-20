@@ -5,7 +5,7 @@ from datetime import datetime, timedelta
 
 # Kết nối Google Sheets bằng file tạo từ Secret
 gc = gspread.service_account(filename='credentials.json')
-sh = gc.open("Ty_Gia_VCB") # Tên file Google Sheets bạn đã tạo
+sh = gc.open("update ty gia") # Tên file Google Sheets bạn đã tạo
 worksheet = sh.sheet1
 
 url = "https://portal.vietcombank.com.vn/UserControls/TVPortal.TyGia/pXML.aspx"
