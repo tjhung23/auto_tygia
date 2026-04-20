@@ -2,14 +2,12 @@ name: Auto_Get_VCB_Rates
 
 on:
   schedule:
-    - cron: '*/5 * * * *' # Chạy vào phút thứ 0 của mỗi giờ
-  workflow_dispatch: # Cho phép bấm nút chạy thủ công
+    - cron: '*/5 * * * *'
+  workflow_dispatch:
 
 jobs:
   build:
     runs-on: ubuntu-latest
-    permissions:
-      contents: write # Cấp quyền cho robot được ghi file vào repo
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
@@ -21,15 +19,11 @@ jobs:
 
       - name: Install dependencies
         run: |
-          pip install requests pandas openpyxl
+          pip install requests pandas gspread oauth2client
+
+      - name: Create credentials file
+        run: |
+          echo '${{ secrets.GSPREAD_JSON }}' > credentials.json
 
       - name: Run scraper
         run: python main.py
-
-      - name: Commit and push changes
-        run: |
-          git config --global user.name "GitHub Action"
-          git config --global user.email "action@github.com"
-          git add ty_gia_vcb.xlsx
-          git commit -m "Cập nhật tỷ giá $(date)" || exit 0
-          git push
